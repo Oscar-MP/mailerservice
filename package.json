@@ -1,0 +1,32 @@
+{
+  "name": "mailerservice",
+  "version": "0.0.1",
+  "description": "Service for sending mails",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrSleider/mailerservice.git"
+  },
+  "keywords": [
+    "nodejs",
+    "microservice",
+    "service",
+    "mailing",
+    "mailer",
+    "mail",
+    "sender"
+  ],
+  "author": "Sleider",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MrSleider/mailerservice/issues"
+  },
+  "homepage": "https://github.com/MrSleider/mailerservice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
