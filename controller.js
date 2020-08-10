@@ -25,14 +25,14 @@ send = (req, res) => {
 
   try {
     // Let's check if the provided data is enough to send the mail correctly
-    if (!body.toEmail || typeof toEmail !== 'string') {
-      res.status(400).send({
+    if (!body.toEmail || typeof body.toEmail !== 'string') {
+      return res.status(400).send({
         message: 'Parameter toEmail is missing.'
       });
     }
 
     if (!body.subject || typeof body.subject !== 'string') {
-      res.status(400).send({
+      return res.status(400).send({
         message: 'Parameter subject is missing.'
       });
     }
@@ -49,14 +49,12 @@ send = (req, res) => {
       if ( err ) {
         console.log('[!] Error: ');
         console.error(err.message);
-
-        //res.status(500).send({message: 'The service could not send the mail.'});
-        throw new TypeError(err.message);
+        return res.status(500).send({message: 'The service could not send the mail.'});
       }
 
 
       console.log(`[*] Mail (${response.messageId}) has been sent: ${response.response}`);
-      res.status(200).send({
+      return res.status(200).send({
         message: 'The mail has been successfully sent!',
         mailId: response.messageId
       });
@@ -66,7 +64,7 @@ send = (req, res) => {
     console.log('[!] An error has occur while sending an email.');
     console.log('[!] Error: ');
     console.error(err.message);
-    res.status(500).send({ message: "Something went wrong! Check log for more details"});
+    return res.status(500).send({ message: "Something went wrong! Check log for more details"});
   }
 
 
