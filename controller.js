@@ -70,7 +70,15 @@ send = (req, res) => {
 
 }
 
+getStatus = (req, res) => {
+  // This function return a server status based on if the service can stablish conection with the SMTP server and if
+  // everything works.
+  // This is used by an api gateway to know the state of the service
+
+
+}
 
 module.exports = {
-  send
+  send,
+  getStatus
 }
