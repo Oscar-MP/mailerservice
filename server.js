@@ -11,12 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 // Setting the headers
-app.use((req, res, next) => {/* 
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'localhost');
   res.header('Access-Control-Allow-Headers', 'X-API-KEY, Origin, X-Requested-Width, Content-Type, Accept, Access-Control-Request-Method');
   res.header('Access-Control-Allow-Methods', 'GET, POST');
   res.header('Allow', 'GET, POST');
-*/
+
   next();
 });
 
@@ -44,12 +44,12 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.json({
     message: 'You have requested the mailer service successfully. Everything seems to work OK.',
-    version: '0.0.1'
+    version: '0.1.0'
   });
 });
 
 app.post('/send', controller.send);
-
+app.get('/status', controller.getStatus);
 
 
 // Export the app to use it from the index.js file
