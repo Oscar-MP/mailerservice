@@ -92,9 +92,31 @@ notFound = (req, res) => {
   });
 }
 
+getList = (req, res) => {
+  // Obtains all the data about a specific mail list
+
+}
+
+putList = (req, res) => {
+  // Creates or updates a mail list
+}
+
+removeList = (req, res) => {
+  // Removes a mail list
+
+}
+
+broadcastMail = (req, res) => {
+  // Send a mail to all contacts from a mail list
+}
+
 module.exports = {
   info,
   send,
   getStatus,
-  notFound
+  notFound,
+  getList,
+  putList,
+  removeList,
+  broadcastMail
 }
