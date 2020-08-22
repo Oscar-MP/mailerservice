@@ -2,7 +2,7 @@
 
 var express         = require('express');
 var bodyParser      = require('body-parser');
-var controller      = require('./controller.js');
+var router          = require('./routes.js');
 
 var app = express();
 
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // Setting the headers
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'localhost');
-  res.header('Access-Control-Allow-Headers', 'X-API-KEY, Origin, X-Requested-Width, Content-Type, Accept, Access-Control-Request-Method');
+  res.header('Access-Control-Allow-Headers', 'x-access-token, X-API-KEY, Origin, X-Requested-Width, Content-Type, Accept, Access-Control-Request-Method');
   res.header('Access-Control-Allow-Methods', 'GET, POST');
   res.header('Allow', 'GET, POST');
 
@@ -22,25 +22,31 @@ app.use((req, res, next) => {
 
 // Logging all the requests to the mailer
 app.use((req, res, next) => {
-  console.log("A request have been made! More info will be added here");
+  console.info(`[REQUEST]: ${req.originalUrl} (${req.method}); [FROM]: ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}`);
   next();
 });
 
+
+// AUTHENTICATION AND AUTHORIZATION OF THE REQUEST
 app.use((req, res, next) => {
-  // Since all requests must be autorized, this middleware will intercept a token and validate it through
-  // the authentication service. A conexión will be stablished with this service and we won't trigger next()
-  // until a response has arrived.
+  // Until the auth service is ready the auth is going to be fake.
+  var auth_fake_tokens = ['776005134f754aa3c7c97c1339f0d147', '472ea74a097063403db334b0ff654ba4', '1d18ca1fa0cb566162468a8958830778'];
+  let token = req.headers['x-access-token'];
 
-  // Now all this will be hand written, in the future the communication module will do the job
+  if (!token) {
+      return res.status(403).send({ message: 'Token not provided!'});
+  }
+
+  if ( !auth_fake_tokens.includes(token)) {
+    return res.status(401).send({ message: 'Unauthorized action!' });
+  }
 
 
-  // Once we are sure the request is legitimate we proceed to the next layer
   next();
 });
 
 
 // ROUTES OF THE MAILER
-var router = require('./routes.js');
 app.use('', router);
 
 
