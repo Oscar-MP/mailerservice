@@ -40,16 +40,8 @@ app.use((req, res, next) => {
 
 
 // ROUTES OF THE MAILER
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'You have requested the mailer service successfully. Everything seems to work OK.',
-    version: '0.1.0'
-  });
-});
-
-app.post('/send', controller.send);
-app.get('/status', controller.getStatus);
+var router = require('./routes.js');
+app.use('', router);
 
 
 // Export the app to use it from the index.js file
