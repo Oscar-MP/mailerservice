@@ -19,6 +19,13 @@ function transporter() {
   });
 }
 
+info = (req, res) => {
+  return res.json({
+    message: 'You have requested the mailer service successfully. Everything seems to work OK.',
+    version: '0.1.0'
+  });
+}
+
 send = (req, res) => {
   // This method sends a mail request to the SMTP server with all the information provided
   var body = req.body;
@@ -78,7 +85,16 @@ getStatus = (req, res) => {
 
 }
 
+notFound = (req, res) => {
+  // This function is called when a route is not found
+  return res.status(404).send({
+    message: 'The route doesn`t exists'
+  });
+}
+
 module.exports = {
+  info,
   send,
-  getStatus
+  getStatus,
+  notFound
 }
