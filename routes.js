@@ -13,6 +13,9 @@ router.get('/', controller.info);
 router.post('/send', controller.send);
 router.get('/status', controller.getStatus);
 
+router.get('/list/:id', controller.getList);              // Get the list information
+router.post('/list/:id', controller.putList);             // Creates or updates a mail list
+router.post('/list/send/:id', controller.broadcastMail);  // Sends a mail to a mail list
 
 // Not found routes
 
