@@ -1,0 +1,9 @@
+{
+  "id": "A5AF78A56FA",
+  "description": "Mail list of test emails ",
+  "contacts": [
+    { "address": "customaddress@gmail.com", "name": "Caren Carpenter" },
+    { "address": "john.doe@gmail.com", "name": "John Doe" },
+    { "address": "rmely9846@gmail.com", "name": "Rame Landry" }
+  ]
+}
